@@ -95,6 +95,8 @@ In both cases, the destination folder should contain `CliffDrop.py`, `CliffDrop.
 
 ### 1. Cycloidal Ramp (Brachistochrone)
 
+<img width="1191" height="914" alt="image" src="https://github.com/user-attachments/assets/20bbeb97-2e56-4009-adf5-41c1bef56375" />
+
 The standard cycloid is the **brachistochrone curve** — the fastest-descent path between two points under gravity. Use it to design ramps for ball runs, marble machines, or gravity-fed conveyors.
 
 ```
@@ -107,6 +109,8 @@ Steps:
 ```
 
 ### 2. Cycloidal Dish / Bowl (Revolution)
+
+<img width="1135" height="838" alt="image" src="https://github.com/user-attachments/assets/9a7acb4a-52ae-4713-af10-be67926b3c0b" />
 
 Revolve a cycloid arch around its baseline to produce a smooth dish with a mathematically precise profile.
 
@@ -121,6 +125,8 @@ Steps:
 
 ### 3. Coin Wormhole / Funnel (Flipped Revolution)
 
+<img width="1519" height="930" alt="image" src="https://github.com/user-attachments/assets/78746beb-5ddc-4806-97db-62019fad7a51" />
+
 Revolve the cycloid arch around a **vertical axis** through its peak to create a funnel-shaped surface — a "coin wormhole" that a coin rolls down with accelerating spiral motion.
 
 ```
@@ -134,6 +140,8 @@ Steps:
 
 ### 4. Epicycloid Decorative Medallion
 
+(Not Pictured)
+
 Use an epicycloid to create Spirograph-style decorative profiles for jewellery, coasters, or medallions.
 
 ```
@@ -146,6 +154,8 @@ Steps:
 
 ### 5. Hypocycloid Astroid Cutout
 
+(Not Pictured)
+
 The 4-cusp hypocycloid (astroid) is a classic shape for decorative cutouts, window grilles, or mathematical art.
 
 ```
@@ -157,6 +167,8 @@ Steps:
 ```
 
 ### 6. Cycloidal Gear Tooth Profile
+
+(Not Pictured)
 
 Cycloidal curves are used in clock gears and cycloidal drives where smooth, low-friction tooth engagement is needed.
 
