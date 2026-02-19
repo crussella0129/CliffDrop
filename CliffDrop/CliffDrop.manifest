@@ -1,0 +1,12 @@
+{
+    "autodeskProduct": "Fusion360",
+    "type": "addin",
+    "id": "com.cliffdrop.cycloidal-sketch-generator",
+    "author": "crussella0129",
+    "description": {
+        "": "Cycloidal sketch curve generator — create cycloid, epicycloid, and hypocycloid splines in Autodesk Fusion sketches."
+    },
+    "version": "1.0.0",
+    "runOnStartup": false,
+    "supportedOS": "windows|mac"
+}
