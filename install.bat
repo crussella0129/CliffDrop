@@ -3,12 +3,15 @@ setlocal
 
 set "ADDIN_NAME=CliffDrop"
 set "SRC=%~dp0%ADDIN_NAME%"
+set "PKG_XML=%~dp0PackageContents.xml"
 
 :: --- Locate Fusion add-in directory ---
 :: Priority 1: ApplicationPlugins (bundle format — used by modern Fusion installs)
 :: Priority 2: API\AddIns (legacy format)
 set "DEST="
+set "BUNDLE="
 if exist "%APPDATA%\Autodesk\ApplicationPlugins" (
+    set "BUNDLE=%APPDATA%\Autodesk\ApplicationPlugins\%ADDIN_NAME%.bundle"
     set "DEST=%APPDATA%\Autodesk\ApplicationPlugins\%ADDIN_NAME%.bundle\Contents"
 ) else if exist "%APPDATA%\Autodesk\Autodesk Fusion\API\AddIns" (
     set "DEST=%APPDATA%\Autodesk\Autodesk Fusion\API\AddIns\%ADDIN_NAME%"
@@ -38,9 +41,16 @@ echo  Target : %DEST%
 echo.
 
 :: --- Remove previous install ---
-if exist "%DEST%" (
-    echo  Removing previous installation...
-    rmdir /s /q "%DEST%"
+if not "%BUNDLE%"=="" (
+    if exist "%BUNDLE%" (
+        echo  Removing previous installation...
+        rmdir /s /q "%BUNDLE%"
+    )
+) else (
+    if exist "%DEST%" (
+        echo  Removing previous installation...
+        rmdir /s /q "%DEST%"
+    )
 )
 
 :: --- Copy add-in files ---
@@ -52,6 +62,13 @@ if %ERRORLEVEL% neq 0 (
     echo  ERROR: File copy failed.
     pause
     exit /b 1
+)
+
+:: --- Copy PackageContents.xml to bundle root (required for bundle format) ---
+if not "%BUNDLE%"=="" (
+    if exist "%PKG_XML%" (
+        copy /y "%PKG_XML%" "%BUNDLE%\PackageContents.xml" >nul
+    )
 )
 
 echo.
