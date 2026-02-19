@@ -4,9 +4,13 @@ setlocal
 set "ADDIN_NAME=CliffDrop"
 set "SRC=%~dp0%ADDIN_NAME%"
 
-:: --- Locate Fusion AddIns directory ---
+:: --- Locate Fusion add-in directory ---
+:: Priority 1: ApplicationPlugins (bundle format — used by modern Fusion installs)
+:: Priority 2: API\AddIns (legacy format)
 set "DEST="
-if exist "%APPDATA%\Autodesk\Autodesk Fusion\API\AddIns" (
+if exist "%APPDATA%\Autodesk\ApplicationPlugins" (
+    set "DEST=%APPDATA%\Autodesk\ApplicationPlugins\%ADDIN_NAME%.bundle\Contents"
+) else if exist "%APPDATA%\Autodesk\Autodesk Fusion\API\AddIns" (
     set "DEST=%APPDATA%\Autodesk\Autodesk Fusion\API\AddIns\%ADDIN_NAME%"
 ) else if exist "%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns" (
     set "DEST=%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns\%ADDIN_NAME%"
@@ -14,10 +18,11 @@ if exist "%APPDATA%\Autodesk\Autodesk Fusion\API\AddIns" (
 
 if "%DEST%"=="" (
     echo.
-    echo  ERROR: Could not find the Fusion AddIns directory.
+    echo  ERROR: Could not find a Fusion add-in directory.
     echo  Looked in:
-    echo    %APPDATA%\Autodesk\Autodesk Fusion\API\AddIns
-    echo    %APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns
+    echo    %%APPDATA%%\Autodesk\ApplicationPlugins
+    echo    %%APPDATA%%\Autodesk\Autodesk Fusion\API\AddIns
+    echo    %%APPDATA%%\Autodesk\Autodesk Fusion 360\API\AddIns
     echo.
     echo  Make sure Autodesk Fusion is installed before running this script.
     echo.
@@ -40,6 +45,7 @@ if exist "%DEST%" (
 
 :: --- Copy add-in files ---
 echo  Copying files...
+mkdir "%DEST%" >nul 2>&1
 xcopy /e /i /y /q "%SRC%" "%DEST%" >nul
 
 if %ERRORLEVEL% neq 0 (

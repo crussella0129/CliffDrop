@@ -5,9 +5,13 @@ ADDIN_NAME="CliffDrop"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 SRC="$SCRIPT_DIR/$ADDIN_NAME"
 
-# --- Locate Fusion AddIns directory ---
+# --- Locate Fusion add-in directory ---
+# Priority 1: ApplicationPlugins (bundle format — used by modern Fusion installs)
+# Priority 2: API/AddIns (legacy format)
 DEST=""
-if [ -d "$HOME/Library/Application Support/Autodesk/Autodesk Fusion/API/AddIns" ]; then
+if [ -d "$HOME/Library/Application Support/Autodesk/ApplicationPlugins" ]; then
+    DEST="$HOME/Library/Application Support/Autodesk/ApplicationPlugins/$ADDIN_NAME.bundle/Contents"
+elif [ -d "$HOME/Library/Application Support/Autodesk/Autodesk Fusion/API/AddIns" ]; then
     DEST="$HOME/Library/Application Support/Autodesk/Autodesk Fusion/API/AddIns/$ADDIN_NAME"
 elif [ -d "$HOME/Library/Application Support/Autodesk/Autodesk Fusion 360/API/AddIns" ]; then
     DEST="$HOME/Library/Application Support/Autodesk/Autodesk Fusion 360/API/AddIns/$ADDIN_NAME"
@@ -15,8 +19,9 @@ fi
 
 if [ -z "$DEST" ]; then
     echo ""
-    echo "  ERROR: Could not find the Fusion AddIns directory."
+    echo "  ERROR: Could not find a Fusion add-in directory."
     echo "  Looked in:"
+    echo "    ~/Library/Application Support/Autodesk/ApplicationPlugins"
     echo "    ~/Library/Application Support/Autodesk/Autodesk Fusion/API/AddIns"
     echo "    ~/Library/Application Support/Autodesk/Autodesk Fusion 360/API/AddIns"
     echo ""
@@ -39,7 +44,8 @@ fi
 
 # --- Copy add-in files ---
 echo "  Copying files..."
-cp -R "$SRC" "$DEST"
+mkdir -p "$DEST"
+cp -R "$SRC"/* "$DEST"/
 
 echo ""
 echo "  Installation complete!"

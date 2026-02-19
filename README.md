@@ -71,14 +71,23 @@ If you're already editing a sketch when you run the command, the curve is added 
 
 ### Manual Install
 
-If the installer can't find your AddIns folder, copy the `CliffDrop/` subfolder manually:
+If the installer can't find your add-ins folder, copy the contents of the `CliffDrop/` subfolder manually. Modern Fusion uses the **ApplicationPlugins** bundle format (preferred); older installs use `API/AddIns`.
+
+**ApplicationPlugins (preferred — modern Fusion):**
+
+| OS      | Destination                                                                                  |
+| ------- | -------------------------------------------------------------------------------------------- |
+| Windows | `%APPDATA%\Autodesk\ApplicationPlugins\CliffDrop.bundle\Contents\`                           |
+| macOS   | `~/Library/Application Support/Autodesk/ApplicationPlugins/CliffDrop.bundle/Contents/`       |
+
+**API/AddIns (legacy — older Fusion 360):**
 
 | OS      | Destination                                                                |
 | ------- | -------------------------------------------------------------------------- |
-| Windows | `%APPDATA%\Autodesk\Autodesk Fusion\API\AddIns\CliffDrop`                 |
-| macOS   | `~/Library/Application Support/Autodesk/Autodesk Fusion/API/AddIns/CliffDrop` |
+| Windows | `%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns\CliffDrop\`            |
+| macOS   | `~/Library/Application Support/Autodesk/Autodesk Fusion 360/API/AddIns/CliffDrop/` |
 
-For older Fusion 360 installs, replace `Autodesk Fusion` with `Autodesk Fusion 360` in the path.
+In both cases, the destination folder should contain `CliffDrop.py`, `CliffDrop.manifest`, and `cycloid_math.py`.
 
 ---
 
